@@ -1,6 +1,8 @@
 import Image from 'next/image'
 
 export default function Home() {
+  console.log('home')
+
   return (
     <div className='flex gap-2 items-center'>
       <Image
