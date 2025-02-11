@@ -1,3 +1,5 @@
+import HomeLayout from '@/modules/home/ui/layouts/home-layout'
+
 interface VideoPageProps {
   params: Promise<{ videoId: string }>
 }
@@ -8,7 +10,9 @@ const VideoPage = async ({ params }: VideoPageProps) => {
 
   return (
     <div>
-      <h1>Video Page: {videoId}</h1>
+      <HomeLayout>
+        <h1>Video Page: {videoId}</h1>
+      </HomeLayout>
     </div>
   )
 }

@@ -5,3 +5,5 @@ interface HomePageProps {
 const Home = ({ children }: HomePageProps) => {
   return <div>{children}home page</div>
 }
+
+export default Home
