@@ -10,26 +10,33 @@ import {
 } from '@/components/ui/sidebar'
 import { HistoryIcon, ListVideoIcon, ThumbsUpIcon } from 'lucide-react'
 import Link from 'next/link'
+import { useAuth, useClerk } from '@clerk/nextjs'
 
 const items = [
   {
     title: 'History',
     url: '/playlists/history',
-    icon: HistoryIcon
+    icon: HistoryIcon,
+    auth: true
   },
   {
     title: 'Liked videos',
     url: '/playlists/liked',
-    icon: ThumbsUpIcon
+    icon: ThumbsUpIcon,
+    auth: true
   },
   {
     title: 'All playlists',
     url: '/playlists',
-    icon: ListVideoIcon
+    icon: ListVideoIcon,
+    auth: true
   }
 ]
 
 const PersonalSection = () => {
+  const { isSignedIn } = useAuth()
+  const clerk = useClerk()
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>You</SidebarGroupLabel>
@@ -41,7 +48,12 @@ const PersonalSection = () => {
                 tooltip={item.title}
                 asChild
                 isActive={false}
-                onClick={() => {}}
+                onClick={(e) => {
+                  if (item.auth && !isSignedIn) {
+                    e.preventDefault()
+                    return clerk.openSignIn()
+                  }
+                }}
               >
                 <Link
                   href={item.url}
