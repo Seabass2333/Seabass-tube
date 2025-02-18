@@ -11,16 +11,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import './globals.css'
-
-// const geistSans = Geist({
-//   variable: '--font-geist-sans',
-//   subsets: ['latin']
-// })
-
-// const geistMono = Geist_Mono({
-//   variable: '--font-geist-mono',
-//   subsets: ['latin']
-// })
+import { TRPCProvider } from '@/trpc/client'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -38,13 +29,7 @@ export default function RootLayout({
     <ClerkProvider afterSignOutUrl='/'>
       <html lang='en'>
         <body className={inter.className}>
-          <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-          {children}
+          <TRPCProvider>{children}</TRPCProvider>
         </body>
       </html>
     </ClerkProvider>
